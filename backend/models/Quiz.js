@@ -8,14 +8,12 @@ const quizSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
     trim: true,
   },
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
     required: true,
-    trim: true,
-    enum: ["Games", "Movies", "Football"],
   },
   prize: {
     type: Number,
@@ -60,4 +58,5 @@ const quizSchema = new mongoose.Schema({
   ],
 });
 
-export default mongoose.model("Quiz", quizSchema);
+const Quiz = mongoose.model("Quiz", quizSchema);
+export default Quiz;

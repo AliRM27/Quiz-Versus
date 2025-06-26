@@ -2,7 +2,13 @@ import dotenv from "dotenv";
 import express from "express";
 import connectDB from "./config/db.js";
 import cors from "cors";
-import authRouter from "./routes/authRoutes.js";
+import {
+  authRoutes,
+  categoryRoutes,
+  shopRoutes,
+  profileRoutes,
+  quizRoutes,
+} from "./routes/imports.js";
 
 dotenv.config();
 connectDB();
@@ -19,7 +25,11 @@ app.get("/", (req, res) => {
   res.send("Welcome to the mobile app");
 });
 
-app.use("/api/auth", authRouter);
+app.use("/api/auth", authRoutes);
+app.use("/api/quizzes", quizRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/shop", shopRoutes);
+app.use("/api/users", profileRoutes);
 
 app.listen(PORT, (err) => {
   if (err) {
