@@ -8,7 +8,10 @@ import {
   shopRoutes,
   profileRoutes,
   quizRoutes,
+  adminRoutes,
 } from "./routes/imports.js";
+import { protect } from "./middleware/protect.js";
+import { isAdmin } from "./middleware/isAdmin.js";
 
 dotenv.config();
 connectDB();
@@ -29,7 +32,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/quizzes", quizRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/shop", shopRoutes);
-app.use("/api/users", profileRoutes);
+app.use("/api/users", protect, profileRoutes);
+app.use("/api/admin", protect, isAdmin, adminRoutes);
 
 app.listen(PORT, (err) => {
   if (err) {

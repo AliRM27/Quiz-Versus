@@ -1,5 +1,5 @@
-import Category from "../models/Category";
-import Quiz from "../models/Quiz";
+import Category from "../models/Category.js";
+import Quiz from "../models/Quiz.js";
 
 export const createCategory = async (req, res) => {
   const { name } = req.body;
@@ -46,12 +46,10 @@ export const removeCategory = async (req, res) => {
 };
 
 export const getAllQuizzesByCategory = async (req, res) => {
-  const { categoryId } = req.params;
+  const { id } = req.params;
 
   try {
-    const quizzes = await Quiz.find({ category: categoryId }).populate(
-      "category"
-    );
+    const quizzes = await Quiz.find({ category: id }).populate("category");
     if (!quizzes.length) {
       return res
         .status(404)
