@@ -3,9 +3,11 @@ import { defaultStyles } from "@/constants/Styles";
 import Logo from "@/assets/svgs/logo.svg";
 import { BackgroundGradient } from "@/components/ui/gradients/background";
 import { Colors, GradientColors } from "@/constants/Colors";
-import { useState } from "react";
+import React, {useState} from "react";
+import {router} from "expo-router";
 
-const index = () => {
+
+export default function Index() {
   const [color, setColor] = useState(GradientColors.purple);
   return (
     <BackgroundGradient style={defaultStyles.container} color={color}>
@@ -21,8 +23,7 @@ const index = () => {
           );
         }}
       />
+      <Button title={"Go to Login"} onPress={() => router.replace("/(auth)")}/>
     </BackgroundGradient>
   );
 };
-
-export default index;
